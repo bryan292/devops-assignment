@@ -1,6 +1,3 @@
-{{- $domain := (lookup "v1" "ConfigMap" "flux-system" "remote-config").data.domain -}}
-{{- $cluster_name := (lookup "v1" "ConfigMap" "flux-system" "remote-config").data.cluster_name -}}
-
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -21,7 +18,7 @@ metadata:
 
 spec:
   rules:
-    - host: devops-assignment-app-{{ $cluster_name }}.{{ $domain }}
+    - host: devops-assignment-app-{{ .Values.cluster_name }}.{{ .Values.domain }}
       http:
         paths:
           - path: /
@@ -33,5 +30,5 @@ spec:
                   number: 80
   tls:
     - hosts:
-        - devops-assignment-app-{{ $cluster_name }}.{{ $domain }}
+        - devops-assignment-app-{{ .Values.cluster_name }}.{{ .Values.domain }}
       secretName: devops-assignment-app-tls

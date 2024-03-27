@@ -1,4 +1,3 @@
-{{- $environment := (lookup "v1" "ConfigMap" "flux-system" "remote-config").data.environment -}}
 
 apiVersion: apps/v1
 kind: Deployment
@@ -24,4 +23,4 @@ spec:
         - containerPort: 3000
         env:
         - name: APP_ENV
-          value: {{ $environment }}
+          value: {{ .Values.environment }}
