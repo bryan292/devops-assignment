@@ -54,7 +54,6 @@ jobs:
             bryan292/devops-assignment-app:latest
 
   deploy-infra:
-    needs: build-and-push-dev
     runs-on: ubuntu-latest
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
     needs: [build-and-push-dev, build-and-push-prod]
