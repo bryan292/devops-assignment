@@ -58,10 +58,13 @@ jobs:
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
     needs: [build-and-push-dev, build-and-push-prod]
     steps:    
+      - name: Check out the code # check out application repository
+        uses: actions/checkout@v2
+
       - name: Checkout Infra Repository
         uses: actions/checkout@v2
         with:
-          repository: 'bryan292/multi-cloud-k8s-iac' # Replace with your actual Repo A details
+          repository: 'bryan292/multi-cloud-k8s-iac'
           path: 'multi-cloud-k8s-iac' # Checks outrepository into a directory named 'multi-cloud-k8s-iac'
       
       - name: Install Terragrunt
