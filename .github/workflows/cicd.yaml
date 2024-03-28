@@ -69,7 +69,7 @@ jobs:
       
       - name: Install Terragrunt
         run: |
-          TERRAGRUNT_VERSION="0.54.16" # Specify the desired Terragrunt version
+          TERRAGRUNT_VERSION="0.55.20" # Specify the desired Terragrunt version
           wget https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64
           chmod +x terragrunt_linux_amd64
           sudo mv terragrunt_linux_amd64 /usr/local/bin/terragrunt
@@ -77,7 +77,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: 1.1.5 # Specify Terraform version
+          terraform_version: 1.7.5 # Terraform version
       
       - name: Deploy with Terragrunt
         run: |
