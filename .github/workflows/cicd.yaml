@@ -78,6 +78,7 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 1.7.5 # Terraform version
+          terraform_wrapper: false
       
       - name: Deploy with Terragrunt
         run: |
