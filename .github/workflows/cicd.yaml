@@ -12,7 +12,7 @@ jobs:
     if: github.ref == 'refs/heads/dev'
     environment: dev
     steps:
-      - name: Check out the code
+      - name: Check out the code # check out application repository
         uses: actions/checkout@v2
       
       - name: Log in to DockerHub
@@ -34,7 +34,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     environment: prod
     steps:
-      - name: Check out the code
+      - name: Check out the code # check out application repository
         uses: actions/checkout@v2
       
       - name: Log in to DockerHub
@@ -65,9 +65,9 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: 'bryan292/multi-cloud-k8s-iac'
-          path: 'multi-cloud-k8s-iac' # Checks outrepository into a directory named 'multi-cloud-k8s-iac'
+          path: 'multi-cloud-k8s-iac' # Checks out infra repository into a directory named 'multi-cloud-k8s-iac'
       
-      - name: Install Terragrunt
+      - name: Install Terragrunt # Install Terragrunt
         run: |
           TERRAGRUNT_VERSION="0.55.20" # Specify the desired Terragrunt version
           wget https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64
@@ -78,12 +78,10 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 1.7.5 # Terraform version
-          terraform_wrapper: false
+          terraform_wrapper: false # Use the Terraform wrapper as false so that we can use Terragrunt
       
-      - name: Deploy with Terragrunt
+      - name: Deploy with Terragrunt # Deploy the infrastructure using Terragrunt, copy the config file and run the apply command not interactively
         run: |
-          pwd
-          ls -ltrha
           cd multi-cloud-k8s-iac/env
           cp ../../config.yaml .
           terragrunt run-all apply --terragrunt-non-interactive
