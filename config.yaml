@@ -13,6 +13,9 @@ global:
   branch: main
   app_repo: https://github.com/bryan292/devops-assignment
 
+umbrella:
+  cluster_autoscaler: true
+
 network:
   vpc_cidr: "10.0.0.0/16" 
   domain: 292s.io
